@@ -1,0 +1,8 @@
+region_0 = "Menu"
+region_1 = "Landing_Zone"
+region_2 = "Nexus"
+region_3 = "Aquaducts"
+region_4 = "Heater Core"
+region_5 = "Ventilation"
+region_6 = "Incubator"
+region_7 = "Labratory"
