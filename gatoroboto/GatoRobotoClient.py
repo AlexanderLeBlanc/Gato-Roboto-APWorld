@@ -270,10 +270,9 @@ def get_clean_game_comms_file(f):
         print("JSON file cleaned successfully.")
         
     return cleaned_json
-                    
-def main():        
-    Utils.init_logging("GatoRobotoClient", exception_logger="Client")
+         
 
+def launch():        
     async def _main():
         ctx = GatoRobotoContext(None, None)
         
@@ -291,6 +290,7 @@ def main():
         await ctx.exit_event.wait()
         await ctx.shutdown()
 
+    Utils.init_logging("GatoRobotoClient", exception_logger="Client")
     import colorama
 
     colorama.init()
@@ -298,8 +298,7 @@ def main():
     asyncio.run(_main())
     colorama.deinit()
 
-parser = get_base_parser(description="Gato Roboto Client, for text interfacing.")
-args = parser.parse_args()
-main()
+    parser = get_base_parser(description="Gato Roboto Client, for text interfacing.")
+    args = parser.parse_args()
         
 

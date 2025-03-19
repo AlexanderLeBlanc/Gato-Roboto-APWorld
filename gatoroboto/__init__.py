@@ -8,18 +8,27 @@ from .Locations import GatoRobotoLocation, location_table, healthkit_location_da
 from .Names import ItemName
 from .Options import GatoRobotoOptions, gatoroboto_option_groups
 from multiprocessing import Process
-from worlds.LauncherComponents import Component, icon_paths, components
+from worlds.LauncherComponents import Type, launch_subprocess, Component, icon_paths, components
 import Utils
 
 from .Names import RegionName
 
-def run_client():
-    print('running gatoroboto client')
-    from GatoRobotoClient import main
-    p = Process(target=main)
-    p.start()
+def launch_client(*args):
+    """
+    Launch the Gato Roboto Client
+    """
+    from .GatoRobotoClient import launch
+    from CommonClient import gui_enabled
+    if gui_enabled:
+        launch_subprocess(launch, name="GatoRobotoClient", args=args)
+    else:
+        launch()
 
-components.append(Component("Gato Roboto Client", "GatoRobotoClient", icon='kiki'))
+
+components.append(Component("Gato Roboto Client", func=launch_client,
+                            component_type=Type.CLIENT, icon="kiki",
+                            supports_uri=True, game_name="Gato Roboto"))
+
 icon_paths['kiki'] = Utils.user_path("worlds/gatoroboto/data", "Kiki.png")
 
 def data_path(file_name: str):
